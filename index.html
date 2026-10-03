@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VOLT/FORM — Creative Studio</title>
+<meta name="description" content="VOLT/FORM — a fictional creative studio concept by Virexa & Hartwell.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0a;--fg:#f4f2ed;--muted:#8e8c87;--line:#292929;--acid:#d7ff3f;--pad:clamp(20px,4vw,64px)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--fg);font-family:Manrope,Arial,sans-serif;overflow-x:hidden;cursor:none}
+a{color:inherit;text-decoration:none}.mono{font-family:"DM Mono",monospace}
+.cursor{position:fixed;z-index:9999;width:18px;height:18px;border:1px solid var(--fg);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .2s,height .2s,background .2s}
+.cursor.big{width:74px;height:74px;background:var(--acid);border-color:var(--acid);mix-blend-mode:normal}
+.progress{position:fixed;z-index:1000;top:0;left:0;height:3px;background:var(--acid);width:0;transform-origin:left}
+.noise{position:fixed;inset:0;pointer-events:none;z-index:900;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+nav{height:88px;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:relative;z-index:20}
+.logo{font-weight:800;letter-spacing:-.06em;font-size:21px}.logo span{color:var(--acid)}
+.navlinks{display:flex;gap:34px;font-size:12px;text-transform:uppercase;letter-spacing:.1em}.navlinks a{opacity:.7;transition:.25s}.navlinks a:hover{opacity:1;color:var(--acid)}
+.menu{display:none;border:0;background:none;color:var(--fg);font:inherit}
+.hero{min-height:calc(100vh - 88px);padding:8vh var(--pad) 5vh;display:flex;flex-direction:column;justify-content:space-between;position:relative}
+.eyebrow{font:12px "DM Mono";letter-spacing:.12em;color:var(--muted);display:flex;justify-content:space-between}
+.hero h1{font-size:clamp(68px,13.2vw,205px);line-height:.8;letter-spacing:-.085em;margin:7vh 0 5vh;max-width:1200px;font-weight:700}
+.hero h1 .line{display:block;overflow:hidden}.hero h1 em{font-style:normal;color:var(--acid)}
+.hero-bottom{display:grid;grid-template-columns:1fr 1fr;gap:30px;border-top:1px solid var(--line);padding-top:22px}
+.hero-bottom p{max-width:530px;color:#b7b4ae;line-height:1.7;font-size:15px;margin:0}
+.scroll{justify-self:end;text-transform:uppercase;font:11px "DM Mono";letter-spacing:.1em;color:var(--muted)}
+.scroll i{display:block;width:1px;height:55px;background:var(--acid);margin:12px auto 0;animation:pulse 1.6s infinite}
+@keyframes pulse{50%{transform:scaleY(.35);transform-origin:top}}
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:17px 0}
+.marquee-track{display:inline-flex;animation:marquee 24s linear infinite;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.marquee span{padding:0 24px}.dot{color:var(--acid)}
+@keyframes marquee{to{transform:translateX(-50%)}}
+section{padding:140px var(--pad)}.section-head{display:flex;justify-content:space-between;gap:30px;margin-bottom:55px}.kicker{font:11px "DM Mono";color:var(--acid);letter-spacing:.12em}.section-title{font-size:clamp(42px,6vw,86px);line-height:.95;letter-spacing:-.065em;margin:0;max-width:850px}
+.projects{display:grid;grid-template-columns:1.4fr .9fr;gap:22px}.project{position:relative;overflow:hidden;background:#141414;min-height:540px}.project:nth-child(2){margin-top:140px;min-height:460px}.project:nth-child(3){grid-column:1/-1;min-height:650px}
+.project img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;filter:grayscale(100%);transition:transform 1s cubic-bezier(.2,.7,.2,1),filter .8s}.project:hover img{transform:scale(1.07);filter:grayscale(0)}
+.project:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.8))}
+.project-info{position:absolute;z-index:2;left:28px;right:28px;bottom:25px;display:flex;justify-content:space-between;align-items:end}.project-name{font-size:clamp(28px,4vw,58px);letter-spacing:-.06em}.project-meta{font:10px "DM Mono";color:#ddd;text-transform:uppercase;text-align:right;line-height:1.6}
+.services{border-top:1px solid var(--line)}.service{display:grid;grid-template-columns:90px 1fr auto;gap:25px;padding:28px 0;border-bottom:1px solid var(--line);align-items:center;transition:.35s}.service:hover{padding-left:20px;color:var(--acid)}.service .num{font:11px "DM Mono";color:var(--muted)}.service h3{margin:0;font-size:clamp(27px,4vw,54px);letter-spacing:-.055em}.service p{margin:0;color:var(--muted);font-size:12px;max-width:260px;line-height:1.6}
+.studio{background:var(--acid);color:#0a0a0a;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end}.studio .kicker{color:#0a0a0a}.studio h2{font-size:clamp(48px,7vw,105px);line-height:.88;letter-spacing:-.075em;margin:20px 0 0}.studio-copy{font-size:18px;line-height:1.65;max-width:520px}.studio-copy p{margin-top:0}.pill{display:inline-flex;border:1px solid #0a0a0a;padding:15px 20px;font:11px "DM Mono";text-transform:uppercase;letter-spacing:.08em;margin-top:25px;transition:.25s}.pill:hover{background:#0a0a0a;color:var(--acid)}
+.contact{min-height:80vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;position:relative}.contact h2{font-size:clamp(64px,11vw,170px);line-height:.82;letter-spacing:-.09em;margin:20px 0 35px;max-width:1150px}.contact h2 em{font-style:normal;color:var(--acid)}.contact-link{font:12px "DM Mono";border-bottom:1px solid var(--fg);padding-bottom:8px;text-transform:uppercase}.orb{position:absolute;width:clamp(160px,22vw,340px);height:clamp(160px,22vw,340px);border:1px solid #383838;border-radius:50%;right:8%;top:30%;animation:spin 15s linear infinite}.orb:before,.orb:after{content:"";position:absolute;inset:18%;border:1px solid #333;border-radius:50%}.orb:after{inset:38%;border-color:var(--acid)}@keyframes spin{to{transform:rotate(360deg)}}
+footer{border-top:1px solid var(--line);padding:24px var(--pad);display:flex;justify-content:space-between;font:10px "DM Mono";color:var(--muted);text-transform:uppercase}
+.reveal{opacity:0;transform:translateY(55px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}.reveal.show{opacity:1;transform:none}.delay1{transition-delay:.08s}.delay2{transition-delay:.16s}.delay3{transition-delay:.24s}
+@media(max-width:800px){
+ body{cursor:auto}.cursor{display:none}.navlinks{display:none}.menu{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.1em}.hero{min-height:calc(100svh - 70px);padding-top:5vh}.hero h1{font-size:19vw;margin:12vh 0 7vh}.hero-bottom{grid-template-columns:1fr}.scroll{justify-self:start}.projects{grid-template-columns:1fr}.project,.project:nth-child(2),.project:nth-child(3){min-height:70vw;margin-top:0}.project:nth-child(3){grid-column:auto}.section-head{display:block}.section-title{margin-top:18px}.service{grid-template-columns:45px 1fr}.service p{display:none}.studio{grid-template-columns:1fr;gap:50px}.orb{opacity:.45;right:-15%;top:38%}section{padding:100px var(--pad)}footer{display:block;line-height:2.1}}
+</style>
+</head>
+<body>
+<div class="progress"></div><div class="noise"></div><div class="cursor"></div>
+
+<nav>
+  <a class="logo magnetic" href="#top">VOLT<span>/</span>FORM</a>
+  <div class="navlinks">
+    <a href="#work">Work</a><a href="#services">Capabilities</a><a href="#studio">Studio</a><a href="#contact">Contact</a>
+  </div>
+  <button class="menu" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">Start a project ↗</button>
+</nav>
+
+<main id="top">
+<section class="hero">
+  <div class="eyebrow"><span>Independent creative studio / 2026</span><span>New York · Remote</span></div>
+  <h1>
+    <span class="line"><span class="reveal">MAKE</span></span>
+    <span class="line"><span class="reveal delay1"><em>NOISE.</em></span></span>
+    <span class="line"><span class="reveal delay2">MEANING.</span></span>
+  </h1>
+  <div class="hero-bottom">
+    <p class="reveal">We build identities, digital experiences and campaigns for ambitious brands that have something worth saying.</p>
+    <div class="scroll">Scroll to explore<i></i></div>
+  </div>
+</section>
+
+<div class="marquee"><div class="marquee-track">
+  <span>Brand systems</span><span class="dot">✦</span><span>Digital experiences</span><span class="dot">✦</span><span>Creative direction</span><span class="dot">✦</span><span>Campaigns</span><span class="dot">✦</span>
+  <span>Brand systems</span><span class="dot">✦</span><span>Digital experiences</span><span class="dot">✦</span><span>Creative direction</span><span class="dot">✦</span><span>Campaigns</span><span class="dot">✦</span>
+</div></div>
+
+<section id="work">
+  <div class="section-head reveal"><span class="kicker">01 / Selected work</span><h2 class="section-title">Ideas with enough voltage to move people.</h2></div>
+  <div class="projects">
+    <article class="project reveal"><img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1800&q=85" alt=""><div class="project-info"><div class="project-name">AETHER</div><div class="project-meta">Brand world / 2026<br>Fashion · Identity</div></div></article>
+    <article class="project reveal delay1"><img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1400&q=85" alt=""><div class="project-info"><div class="project-name">NOVA</div><div class="project-meta">Digital / 2026<br>Technology · Product</div></div></article>
+    <article class="project reveal delay2"><img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1800&q=85" alt=""><div class="project-info"><div class="project-name">FIELD NOTES</div><div class="project-meta">Campaign / 2026<br>Culture · Editorial</div></div></article>
+  </div>
+</section>
+
+<section id="services">
+  <div class="section-head reveal"><span class="kicker">02 / Capabilities</span><h2 class="section-title">One studio. No unnecessary layers.</h2></div>
+  <div class="services">
+    <div class="service reveal"><span class="num">01</span><h3>Brand strategy</h3><p>Positioning, verbal identity, visual systems and the rules that keep a brand coherent.</p><span>↗</span></div>
+    <div class="service reveal"><span class="num">02</span><h3>Digital design</h3><p>Websites and product experiences that feel as good as they function.</p><span>↗</span></div>
+    <div class="service reveal"><span class="num">03</span><h3>Creative direction</h3><p>Campaign worlds, art direction and launch systems built around one sharp idea.</p><span>↗</span></div>
+    <div class="service reveal"><span class="num">04</span><h3>Motion & content</h3><p>Motion language, social assets and visual storytelling made for attention.</p><span>↗</span></div>
+  </div>
+</section>
+
+<section id="studio" class="studio">
+  <div class="reveal"><span class="kicker">03 / The studio</span><h2>Small by design.<br>Big on intent.</h2></div>
+  <div class="studio-copy reveal delay1"><p>VOLT/FORM is a fictional independent creative studio concept built for brands that would rather be remembered than merely seen.</p><p>Strategy and making happen together, without the handoff maze.</p><a class="pill magnetic" href="#contact">Tell us what you're building ↗</a></div>
+</section>
+
+<section id="contact" class="contact">
+  <span class="kicker reveal">04 / Start a conversation</span>
+  <h2 class="reveal delay1">Have a good<br><em>problem?</em></h2>
+  <a class="contact-link magnetic reveal delay2" href="mailto:virexahartwell@gmail.com?subject=VOLT%2FFORM%20Project%20Enquiry&body=Hi%20Virexa%20%26%20Hartwell%2C%0A%0AI%27d%20like%20to%20discuss%20a%20creative%20project.%0A%0ARegards%2C">Start a project ↗</a>
+  <div class="orb"></div>
+</section>
+</main>
+
+<footer><span>VOLT/FORM — fictional creative studio concept</span><span>Designed by Virexa & Hartwell · 2026</span></footer>
+<script>
+const cursor=document.querySelector('.cursor');
+window.addEventListener('pointermove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'});
+document.querySelectorAll('a,.service,.project,button').forEach(el=>{
+ el.addEventListener('mouseenter',()=>cursor.classList.add('big'));
+ el.addEventListener('mouseleave',()=>cursor.classList.remove('big'));
+});
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.12,rootMargin:'0px 0px -50px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+window.addEventListener('scroll',()=>{const h=document.documentElement;document.querySelector('.progress').style.width=(scrollY/(h.scrollHeight-innerHeight)*100)+'%'});
+document.querySelectorAll('.magnetic').forEach(el=>{
+ el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();el.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.12}px,${(e.clientY-r.top-r.height/2)*.12}px)`});
+ el.addEventListener('pointerleave',()=>el.style.transform='');
+});
+</script>
+</body>
+</html>
